@@ -19,6 +19,9 @@ namespace Project.Controllers
         public ActionResult FirstGame(users m)
         {
           return RedirectToAction("Startup");
+            //this is your brain
+
         }
+
     }
 }
