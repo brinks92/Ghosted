@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Startup";
+}
+
+<h2>Are you a student or a Teacher?</h2>
+@using (Html.BeginForm())
+{
+
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Student" name="submit" class="btn btn-default" />
+
+        <input type="submit" value="Teacher" name="submit" class="btn btn-default" />
+    </div>
+
+}
