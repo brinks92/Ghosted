@@ -211,6 +211,7 @@
     <Content Include="Views\Game\FirstGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\TheBenBellFolder2\" />
     <Folder Include="The Ben Bell Folder\" />
   </ItemGroup>
   <ItemGroup>
