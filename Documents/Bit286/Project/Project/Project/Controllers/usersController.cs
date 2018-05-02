@@ -30,7 +30,7 @@ namespace Project.Controllers
 
 
                 case "Student":
-                    return RedirectToAction("FirstGame","Game");
+                    return RedirectToAction("Index");
             }
 
             return View();
