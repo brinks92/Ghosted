@@ -210,7 +210,10 @@
     <Content Include="Views\users\Startup.cshtml" />
     <Content Include="Views\Game\FirstGame.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="The Ben Bell Folder\" />
+    <Folder Include="TheBenBellFolder2\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
