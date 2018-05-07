@@ -1,0 +1,68 @@
+﻿@model Project.ViewModels.SecondGameViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SecondGame</title>
+
+    <style>
+        body{
+            background-color: skyblue;
+        }
+
+        h4{
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: xx-large;
+        }
+        .form-group{
+
+            text-align:center;
+            display:inline-block;
+            font-size: xx-large;
+            padding: 25%,25%,25%,25%;
+        }
+
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+    <div class="form-horizontal">
+        <h4>@ViewBag.question</h4>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="@ViewBag.ans1" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@ViewBag.correct" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button"value="@ViewBag.answ" class="btn btn-default" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button"  value="@ViewBag.answ3" class="btn btn-default" />
+        </div>
+    </div>
+    </div>
+    }
+    
+    
+</body>
+</html>

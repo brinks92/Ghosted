@@ -12,6 +12,64 @@ namespace Project.Controllers
     {
         private MyDbContext db = new MyDbContext();
 
+
+        public ActionResult SecondGame()
+        {
+            Random rnd = new Random();
+
+            string[] q = new string[3];
+
+            q[0] = "What has 3 sides?";
+
+            q[1] = "what has 4 sides all equal to eachother?";
+
+            q[2] = "What has zero sides?";
+
+
+
+            string x = null;
+
+            for (int i = 0; i < q.Length; i++)
+            {
+                ViewBag.question = q[rnd.Next(0, 3)];
+                x = ViewBag.question;
+            }
+               
+   
+            switch (x)
+            {
+                case "What has 3 sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Triangle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+                    
+
+                case "what has 4 sides all equal to eachother?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.answ= "Triangle";
+                    ViewBag.correct = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+
+                case "What has zero sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Circle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+            }    
+            
+            return View(); 
+        }
+
+        [HttpPost]
+        public ActionResult SecondGame(SecondGameViewModel vm)
+        {
+            return RedirectToAction("Welcome");
+        }
+
         public ActionResult Welcome()
         {
            WelcomeViewModel vm = new WelcomeViewModel();
