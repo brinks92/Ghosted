@@ -17,28 +17,39 @@ namespace Project.Controllers
         {
             Random rnd = new Random();
 
-            string[] q = new string[3];
+            string[] questions = new string[7];
 
-            q[0] = "What has 3 sides?";
+            questions[0] = "What Shape Has 0 Sides?";
+            questions[1] = "What Shape Has 3 Sides?";
+            questions[2] = "What Shape Has 4 Sides All Equal To Eachother?";
+            questions[3] = "What Shape Has 5 sides?";
+            questions[4] = "What Shape Has 6 sides?";
+            questions[5] = "What Shape Has 7 sides?";
+            questions[6] = "What Shape Has 8 sides?";
 
-            q[1] = "what has 4 sides all equal to eachother?";
 
-            q[2] = "What has zero sides?";
 
 
 
             string x = null;
 
-            for (int i = 0; i < q.Length; i++)
+            for (int i = 0; i < questions.Length; i++)
             {
-                ViewBag.question = q[rnd.Next(0, 3)];
+                ViewBag.question = questions[rnd.Next(0, 7)];
                 x = ViewBag.question;
             }
                
    
             switch (x)
             {
-                case "What has 3 sides?":
+                case "What Shape Has 0 Sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Circle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+
+                case "What Shape Has 3 Sides?":
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Triangle";
                     ViewBag.answ = "Square";
@@ -46,14 +57,35 @@ namespace Project.Controllers
                     break;
                     
 
-                case "what has 4 sides all equal to eachother?":
+                case "What Shape Has 4 Sides All Equal To Eachother?":
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.answ= "Triangle";
                     ViewBag.correct = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
 
-                case "What has zero sides?":
+                case  "What Shape Has 5 sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Circle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+
+                case "What Shape Has 6 sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Circle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+
+                case "What Shape Has 7 sides?":
+                    ViewBag.ans1 = "Rectangle";
+                    ViewBag.correct = "Circle";
+                    ViewBag.answ = "Square";
+                    ViewBag.answ3 = "Pentagon";
+                    break;
+
+                case "What Shape Has 8 sides?":
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Circle";
                     ViewBag.answ = "Square";
@@ -67,7 +99,7 @@ namespace Project.Controllers
         [HttpPost]
         public ActionResult SecondGame(SecondGameViewModel vm)
         {
-            return RedirectToAction("Welcome");
+            return RedirectToAction("SecondGame");
         }
 
         public ActionResult Welcome()
