@@ -158,6 +158,8 @@
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SecondGameViewModel.cs" />
+    <Compile Include="ViewModels\WelcomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Project.Models.MyDbContext.mdf" />
@@ -171,6 +173,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\elephant.png" />
+    <Content Include="Images\Pug.JPG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -209,9 +212,12 @@
     <Content Include="Views\users\Login.cshtml" />
     <Content Include="Views\users\Startup.cshtml" />
     <Content Include="Views\Game\FirstGame.cshtml" />
+    <Content Include="Views\Game\SecondGame.cshtml" />
+    <Content Include="Views\Game\StudentStart.cshtml" />
+    <Content Include="Views\Game\Welcome.cshtml" />
+    <Content Include="The Ben Bell Folder\ViewPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="The Ben Bell Folder\" />
     <Folder Include="TheBenBellFolder2\" />
   </ItemGroup>
   <ItemGroup>
