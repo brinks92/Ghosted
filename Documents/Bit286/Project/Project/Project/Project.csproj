@@ -232,6 +232,7 @@
     <Content Include="The Ben Bell Folder\ViewPage1.cshtml" />
     <Content Include="The Ben Bell Folder\ViewPage2.cshtml" />
     <Content Include="The Ben Bell Folder\ViewPage3.cshtml" />
+    <Content Include="Views\Game\ThirdGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TheBenBellFolder2\" />

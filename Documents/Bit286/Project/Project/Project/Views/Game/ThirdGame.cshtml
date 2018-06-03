@@ -1,0 +1,169 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <title></title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: x-large;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/75/Parliament_at_Sunset.JPG');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #clockFace {
+            position: relative;
+            width: 100%;
+            height: 260px;
+        }
+
+        #hourHand {
+            position: absolute;
+            float: left;
+            top: 141px;
+            left: 552.5px;
+            background-color: transparent;
+        }
+
+        #minuteHand {
+            position: absolute;
+            float: left;
+            top: 139px;
+            left: 555px;
+            background-color: transparent;
+        }
+
+        #hours, #minutes {
+            display: inline;
+            font-size: xx-large;
+            color: white;
+            font-style: oblique;
+            font-family: 'Comic Sans MS';
+        }
+
+        #header {
+            font-size: 24pt;
+            font-family: 'Comic Sans MS';
+            color: forestgreen;
+            width: 100%;
+            height: 10%;
+            text-align: center;
+        }
+
+        #main {
+            padding: 20px;
+            float: left;
+            width: 40%; /* The width is 40%, by default */
+            color: white;
+            font-family: 'Comic Sans MS';
+            font-size: xx-large;
+        }
+
+        #left {
+            padding: 20px;
+            float: left;
+            width: 30% /* the width is 30%, by default */
+        }
+
+        #right {
+            padding: 20px;
+            float: left;
+            width: 30%; /* The width is 30%, by default */
+        }
+        /* Use a media query to add a break point at 800px: */
+        @@media screen and (max-width:400px) {
+            #left, #main, #right {
+                width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"><p>West Minster Abbey and Big Ben</p></div>
+
+    <div id="left">
+        Hi! Reggie has made it all the way to London, England, home of West Minster Abbey and Big Ben.<br />
+        Big Ben is the what we call the big clock.
+    </div>
+
+    <div id="main">
+        <center>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Analogue_clock_face.svg" id="clockFace" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Clock-hour-12.svg/251px-Clock-hour-12.svg.png" id="hourHand">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Clock-minute-30.svg/251px-Clock-minute-30.svg.png" id="minuteHand">
+            <br />
+            Current Time
+            <p id="hours">12</p>:<p id="minutes"></p>
+            <br />
+            <button id="btnHour">Turn the Hour Hand Clockwise</button><button id="btnMinute">Turn the Minute Hand Clockwise</button>
+        </center>
+    </div>
+
+    <div id="right">How To Play</div>
+
+    <script>
+        $(document).ready(function () {
+            var hourDegrees = 0;
+            var minuteDegrees = 0;
+
+            var hourCounter = 12;    // the hour hand starting position
+            var minuteCounter = 30;     // the minute hand starting position
+
+            $("#hours").text(hourCounter);
+            $("#minutes").text(minuteCounter);
+
+            function RotateMinuteHand($rotimg) {
+                $rotimg.css('-ms-transform', 'rotate(' + minuteDegrees + 'deg)');
+                $rotimg.css('-webkit-transform', 'rotate(' + minuteDegrees + 'deg)');
+                $rotimg.css('transform', 'rotate(' + minuteDegrees + 'deg)');
+            }
+            function RotateHourHand($rotimg) {
+                $rotimg.css('-ms-transform', 'rotate(' + hourDegrees + 'deg)');
+                $rotimg.css('-webkit-transform', 'rotate(' + hourDegrees + 'deg)');
+                $rotimg.css('transform', 'rotate(' + hourDegrees + 'deg)');
+            }
+
+            $("#btnHour").on('click',
+                function () {
+                    var $rotimg = $('#hourHand');
+
+                    if (hourCounter == 12)
+                        hourCounter = 1;    // reset the hour counter
+                    else
+                        hourCounter++;  // increment hours by one
+
+                    $("#hours").text(hourCounter);
+                    hourDegrees += 30;  // 360 degrees divided by 12 (hours in a day) equals 30 degrees per hour
+                    RotateHourHand($rotimg);
+                });
+
+            $("#btnMinute").on('click',
+                function () {
+                    var $rotimg = $('#minuteHand');
+
+                    if (minuteCounter == 59)
+                        minuteCounter = "0" + 0;    // reset the minute counter
+                    else
+                        minuteCounter++;  // increment minutes by one
+
+                    if (1 <= minuteCounter && minuteCounter <= 9)
+                        minuteCounter = "0" + minuteCounter;
+
+                    $("#minutes").text(minuteCounter);
+                    minuteDegrees += 6;     // 360 degrees divided by 60 (minutes in an hour) equals 6 degrees per minute
+                    RotateMinuteHand($rotimg);
+                });
+
+        });
+    </script>
+</body>
+</html>

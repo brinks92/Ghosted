@@ -215,6 +215,12 @@ namespace Project.Controllers
 
         }
 
+        [HttpGet]
+            public ActionResult ThirdGame()
+        {
+            return View();
+        }
+
         private users GetTempUser()
         {
             if (Session["tempUser"] == null)
