@@ -12,8 +12,10 @@
     <title>SecondGame</title>
 
     <style>
-        body{
-            background-color: skyblue;
+        body {
+            
+            background-image: url('../../Images/Game2Background.png'); 
+            background-size: contain;
         }
 
         h4{
@@ -41,34 +43,43 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.ans1" class="btn btn-default" />
+                    <input type="button" value="@ViewBag.ans1" style="@ViewBag.e" class="btn btn-default" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="@ViewBag.correct" class="btn btn-default" />
+                    <input type="submit" value="@ViewBag.correct" style="@ViewBag.f" class="btn btn-default" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.answ" class="btn btn-default" />
+                    <input type="button" value="@ViewBag.answ" style="@ViewBag.e" class="btn btn-default" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.answ3" class="btn btn-default" />
+                    <input type="button" value="@ViewBag.answ3" style="@ViewBag.e" class="btn btn-default" />
                 </div>
             </div>
         </div>
+
+        <div style="@ViewBag.seen">
+            @Html.ActionLink("Next Game", "FirstGame")
+        </div>
+       
         if (@ViewBag.correct != null)
         {
-            <img src="~/Images/Pug.jpg" style="display:block" alt="coins" />
+            <H1>@ViewBag.message</H1>
+            <p><img src="~/Images/Pug.jpg" style="@ViewBag.showPic" alt="coins" /></p>
+            
         }
 
     }
 
 
+    <script>
 
+    </script>
 </body>
 </html>

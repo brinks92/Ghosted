@@ -15,9 +15,46 @@ namespace Project.Controllers
 
         public ActionResult SecondGame()
         {
+            // display for picture and success message if answer is answered correctly set to not show in view
+
+            ViewBag.e = "display: none";
+            ViewBag.f = "display:inline";
+            ViewBag.question = "are you ready";
+            ViewBag.ans1 = "no";
+            ViewBag.correct = "yes";
+            ViewBag.answ = "no";
+            ViewBag.answ3 = "no";
+
+            ViewBag.seen = "visibility: hidden";
+            ViewBag.showPic = "display: none";
+            Session["counter"] = 0;
+
+            return View(); 
+        }
+      
+
+        [HttpPost]
+        public ActionResult SecondGame(SecondGameViewModel vm)
+        {
+           
+
+            int counter = (int)Session["counter"];
+
+            Session["counter"] = counter++;
+            ViewBag.e = "display: inline";
+            ViewBag.f = "display: inline";
+            if (counter == 7)
+            {
+                ViewBag.e = "display: none";
+                ViewBag.f = "display:none";
+            }
+            ViewBag.showPic = "display:none";
+            ViewBag.message = "Lets DO THIS!";
+          
             Random rnd = new Random();
 
-            string[] questions = new string[7];
+            string[] questions = new string[8];
+            string[] pictures = new string[8];
 
             questions[0] = "What Shape Has 0 Sides?";
             questions[1] = "What Shape Has 3 Sides?";
@@ -26,21 +63,27 @@ namespace Project.Controllers
             questions[4] = "What Shape Has 6 sides?";
             questions[5] = "What Shape Has 7 sides?";
             questions[6] = "What Shape Has 8 sides?";
+            questions[7] = "You did it! Now Reggie has some great pics to remember the Parthenon. Press the next level button" +
+                " to go see another Wonder Of The World";
 
+            //pictures[0] =  ;
+            //pictures[1] =  ;
+            //pictures[2] =  ;
+            //pictures[3] =  ;
+            //pictures[4] =  ;
+            //pictures[5] =  ;
+            //pictures[6] =  ;
+            //pictures[7] =  ;
+            string questionString = null;
+            //assign question to view and question string so switchcase can assign answer pool
+            
+                ViewBag.question = questions[counter];
 
+                questionString = ViewBag.question;
+            
 
-
-
-            string x = null;
-
-            for (int i = 0; i < questions.Length; i++)
-            {
-                ViewBag.question = questions[rnd.Next(0, 7)];
-                x = ViewBag.question;
-            }
-               
-   
-            switch (x)
+            // switch case checks questionString to determine answers pool to add to view
+            switch (questionString)
             {
                 case "What Shape Has 0 Sides?":
                     ViewBag.ans1 = "Rectangle";
@@ -55,57 +98,66 @@ namespace Project.Controllers
                     ViewBag.answ = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
-                    
+
 
                 case "What Shape Has 4 Sides All Equal To Eachother?":
                     ViewBag.ans1 = "Rectangle";
-                    ViewBag.answ= "Triangle";
+                    ViewBag.answ = "Triangle";
                     ViewBag.correct = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
 
-                case  "What Shape Has 5 sides?":
+                case "What Shape Has 5 sides?":
                     ViewBag.ans1 = "Rectangle";
-                    ViewBag.correct = "Circle";
+                    ViewBag.correct = "Pentagon";
                     ViewBag.answ = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
 
                 case "What Shape Has 6 sides?":
                     ViewBag.ans1 = "Rectangle";
-                    ViewBag.correct = "Circle";
+                    ViewBag.correct = "Hexagon";
                     ViewBag.answ = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
 
                 case "What Shape Has 7 sides?":
                     ViewBag.ans1 = "Rectangle";
-                    ViewBag.correct = "Circle";
+                    ViewBag.correct = "Heptagon";
                     ViewBag.answ = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
 
                 case "What Shape Has 8 sides?":
                     ViewBag.ans1 = "Rectangle";
-                    ViewBag.correct = "Circle";
+                    ViewBag.correct = "Octagon";
                     ViewBag.answ = "Square";
                     ViewBag.answ3 = "Pentagon";
                     break;
-            }    
-            
-            return View(); 
-        }
+            }
+            Session["counter"] = counter++;
 
-        [HttpPost]
-        public ActionResult SecondGame(SecondGameViewModel vm)
-        {
-            return RedirectToAction("SecondGame");
+            counter++;
+
+            if(counter>= 9)
+            {
+                ViewBag.showPic = "display:inline";
+                ViewBag.seen = "visibility: visible";
+            }
+            else
+            {
+                ViewBag.seen = "visibility: hidden";
+            }
+
+
+            return View();
         }
+        
 
         public ActionResult Welcome()
         {
            WelcomeViewModel vm = new WelcomeViewModel();
-
+        
             vm.kids = new List<users>();
 
             int times = db.users.Max(m => m.UserID);
