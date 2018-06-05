@@ -155,7 +155,9 @@ namespace Project.Controllers
 
         public ActionResult Welcome()
         {
-           WelcomeViewModel vm = new WelcomeViewModel();
+            Session["UserId"] = null;
+
+            WelcomeViewModel vm = new WelcomeViewModel();
         
             vm.kids = new List<users>();
 
@@ -188,7 +190,7 @@ namespace Project.Controllers
 
            db.SaveChanges();
 
-            return RedirectToAction("FirstGame"); 
+            return RedirectToAction("FirstGameInstruction"); 
         }
 
         public ActionResult StudentStart()
@@ -203,6 +205,10 @@ namespace Project.Controllers
             return RedirectToAction("Welcome");
         }
         // GET: Game
+        public ActionResult FirstGameInstruction()
+        {
+            return View(); 
+        }
         public ActionResult FirstGame()
         {
             return View();
