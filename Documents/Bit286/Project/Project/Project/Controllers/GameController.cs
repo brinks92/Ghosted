@@ -36,8 +36,7 @@ namespace Project.Controllers
         [HttpPost]
         public ActionResult SecondGame(SecondGameViewModel vm)
         {
-           
-
+          
             int counter = (int)Session["counter"];
 
             Session["counter"] = counter++;
@@ -184,7 +183,10 @@ namespace Project.Controllers
 
             us.UserName = vm.UserName;
 
-            db.SaveChanges();
+           
+            Session["UserId"] = us.UserID;
+
+           db.SaveChanges();
 
             return RedirectToAction("FirstGame"); 
         }
@@ -210,15 +212,40 @@ namespace Project.Controllers
         [HttpPost]
         public ActionResult FirstGame(users m)
         {
-          return RedirectToAction("Startup");
-            //this is your brain
+            int x = (int)Session["UserId"];
+
+             users student = db.users.SingleOrDefault(l => l.UserID == x);
+
+            student.UserName = "One point";
+            db.SaveChanges();
+          return RedirectToAction("SecondGame");
+            
 
         }
 
         [HttpGet]
             public ActionResult ThirdGame()
         {
+            int x = (int)Session["UserId"];
+
+            users m = db.users.SingleOrDefault(i => i.UserID == x);
+
+            m.UserName = "Two Points";
+
+            db.SaveChanges();
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult ThirdGame (users m)
+        {
+            int x = (int)Session["UserId"];
+
+            users d = db.users.SingleOrDefault(l => l.UserID == x);
+
+            d.UserName = "Three Points";
+
+            return RedirectToAction("Index", "users");
         }
 
         private users GetTempUser()
