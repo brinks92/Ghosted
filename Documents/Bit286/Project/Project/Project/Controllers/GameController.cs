@@ -226,13 +226,13 @@ namespace Project.Controllers
         [HttpGet]
             public ActionResult ThirdGame()
         {
-            int x = (int)Session["UserId"];
+            //int x = (int)Session["UserId"];
 
-            users m = db.users.SingleOrDefault(i => i.UserID == x);
+            //users m = db.users.SingleOrDefault(i => i.UserID == x);
 
-            m.UserName = "Two Points";
+            //m.UserName = "Two Points";
 
-            db.SaveChanges();
+            //db.SaveChanges();
 
             return View();
         }

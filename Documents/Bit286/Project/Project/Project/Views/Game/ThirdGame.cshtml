@@ -12,9 +12,10 @@
         * {
             box-sizing: border-box;
         }
+
         body {
             font-size: x-large;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/75/Parliament_at_Sunset.JPG');
+            background-image: url('../../Images/westminster_bigben.jpg');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -28,7 +29,7 @@
         #hourHand {
             position: absolute;
             float: left;
-            top: 27.6%;
+            top: 25.1%;
             left: 41.8%;
             background-color: transparent;
         }
@@ -36,7 +37,7 @@
         #minuteHand {
             position: absolute;
             float: left;
-            top: 27.6%;
+            top: 25.1%;
             left: 41.8%;
             background-color: transparent;
         }
@@ -44,7 +45,8 @@
         #hours, #minutes {
             display: inline;
             font-size: xx-large;
-            color: white;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            color: forestgreen;
             font-style: oblique;
             font-family: 'Comic Sans MS';
         }
@@ -63,6 +65,7 @@
             /*padding: 20px;*/
             float: left;
             width: 40%; /* The width is 40%, by default */
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             color: white;
             font-family: 'Comic Sans MS';
             font-size: xx-large;
@@ -76,7 +79,8 @@
             font-style: oblique;
             color: black;
             text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
-6        }
+            text-align: left;
+        }
 
         #right {
             /*padding: 20px;*/
@@ -86,6 +90,17 @@
             font-style: oblique;
             color: black;
             text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+            text-align: left;
+        }
+
+        #TryAgainMsgT1 {
+            color: red;
+        }
+        #TryAgainMsgT2 {
+            color: red;
+        }
+        #TryAgainMsgT3 {
+            color: red;
         }
         /* Use a media query to add a break point at 800px: */
         @@media screen and (max-width:400px) {
@@ -93,34 +108,45 @@
                 width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
             }
         }
-
     </style>
 </head>
 <body>
     <div id="header"><h1>West Minster Abbey and Big Ben</h1></div>
 
     <div id="left">
-        Hi! Reggie has made it all the way to London, England, home of West Minster Abbey and the clock, Big Ben!<br />
-        
+        Reggie has made it all the way to London, England, home of West Minster Abbey and the clocktower, Big Ben!<br />
+        <img src="~/Images/BritishPug.png" />
     </div>
 
     <div id="main">
         <center>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Analogue_clock_face.svg" id="clockFace" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Clock-hour-12.svg/251px-Clock-hour-12.svg.png" id="hourHand">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Clock-minute-30.svg/251px-Clock-minute-30.svg.png" id="minuteHand">
+            <img src="~/Images/Analogue_clock_face.svg" id="clockFace" />
+            <img src="~/Images/Clock-hour-12.svg.png" id="hourHand">
+            <img src="~/Images/Clock-minute-30.svg.png" id="minuteHand">
             <br />
             Current Time
             <p id="hours">12</p>:<p id="minutes"></p>
             <br />
-            <button id="btnHour">Turn the Hour Hand Clockwise</button><button id="btnMinute">Turn the Minute Hand Clockwise</button>
+            <button id="btnHour">Turn the Hour Hand</button>&nbsp;&nbsp;<button id="btnMinute">Turn the Minute Hand</button>
         </center>
     </div>
 
-    <div id="right">Help Reggie set his watch!<br />
-        <textarea id="firstTask">to do 1</textarea><br />
-    <textarea id="secondTask">to do 2 </textarea><br />
-    <textarea id="thirdTask">to do 3</textarea>
+    <div id="right">
+
+        <div id="firstTask">
+            The bell rings every 15 minutes, when will the bell ring next, if it's 12:30 right now?
+            Move the minute hand by clicking the right button.
+
+            <button id="btnT1">Check Your Answer!</button><p id="TryAgainMsgT1" hidden>TRY AGAIN!</p>
+        </div>
+        <br />
+
+        <div id="secondTask">
+            <button id="btnT2" hidden>Check Your Answer!</button><p id="TryAgainMsgT2" hidden>TRY AGAIN!</p>
+        </div><br />
+
+
+        <div id="thirdTask"></div>
     </div>
 
     <script>
@@ -175,6 +201,19 @@
                     $("#minutes").text(minuteCounter);
                     minuteDegrees += 6;     // 360 degrees divided by 60 (minutes in an hour) equals 6 degrees per minute
                     RotateMinuteHand($rotimg);
+                });
+
+            $("#btnT1").on('click',
+                function () {
+                    if (minuteCounter == 45) {
+                        $("#firstTask").slideUp();
+                        $("#secondTask").text("If it takes Reggie 35 minutes to walk around the building, what time will it be, if Reggie starts at " + hourCounter + ":" + minuteCounter + "?");
+                        $("#secondTask").slideDown();
+                        $("#secondTask").hide();
+                    }
+                    else {
+                        $("#TryAgainMsgT1").slideToggle().delay(1500).slideToggle();
+                    }
                 });
 
         });

@@ -172,8 +172,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Analogue_clock_face.svg" />
     <Content Include="Images\BestWondersWithBoarder.jpeg" />
     <Content Include="Images\bricks.jpg" />
+    <Content Include="Images\BritishPug.png" />
+    <Content Include="Images\Clock-hour-12.svg.png" />
+    <Content Include="Images\Clock-minute-30.svg.png" />
     <Content Include="Images\Game2Background.png" />
     <Content Include="Images\Game2StartPage.png" />
     <Content Include="Images\Game2StartPageWithBoarder2.jpg" />
@@ -188,6 +192,7 @@
     <Content Include="Images\pic9b.jpeg" />
     <Content Include="Images\Pug.JPG" />
     <Content Include="Images\the-grand-canyon.jpg" />
+    <Content Include="Images\westminster_bigben.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
