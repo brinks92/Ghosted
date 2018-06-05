@@ -12,7 +12,6 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             font-size: x-large;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/75/Parliament_at_Sunset.JPG');
@@ -29,16 +28,16 @@
         #hourHand {
             position: absolute;
             float: left;
-            top: 141px;
-            left: 552.5px;
+            top: 27.6%;
+            left: 41.8%;
             background-color: transparent;
         }
 
         #minuteHand {
             position: absolute;
             float: left;
-            top: 139px;
-            left: 555px;
+            top: 27.6%;
+            left: 41.8%;
             background-color: transparent;
         }
 
@@ -53,6 +52,7 @@
         #header {
             font-size: 24pt;
             font-family: 'Comic Sans MS';
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             color: forestgreen;
             width: 100%;
             height: 10%;
@@ -60,7 +60,7 @@
         }
 
         #main {
-            padding: 20px;
+            /*padding: 20px;*/
             float: left;
             width: 40%; /* The width is 40%, by default */
             color: white;
@@ -69,15 +69,23 @@
         }
 
         #left {
-            padding: 20px;
+            /*padding: 20px;*/
             float: left;
-            width: 30% /* the width is 30%, by default */
-        }
+            width: 30%; /* the width is 30%, by default */
+            font-family: 'Comic Sans MS';
+            font-style: oblique;
+            color: black;
+            text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+6        }
 
         #right {
-            padding: 20px;
+            /*padding: 20px;*/
             float: left;
             width: 30%; /* The width is 30%, by default */
+            font-family: 'Comic Sans MS';
+            font-style: oblique;
+            color: black;
+            text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
         }
         /* Use a media query to add a break point at 800px: */
         @@media screen and (max-width:400px) {
@@ -85,14 +93,15 @@
                 width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
             }
         }
+
     </style>
 </head>
 <body>
-    <div id="header"><p>West Minster Abbey and Big Ben</p></div>
+    <div id="header"><h1>West Minster Abbey and Big Ben</h1></div>
 
     <div id="left">
-        Hi! Reggie has made it all the way to London, England, home of West Minster Abbey and Big Ben.<br />
-        Big Ben is the what we call the big clock.
+        Hi! Reggie has made it all the way to London, England, home of West Minster Abbey and the clock, Big Ben!<br />
+        
     </div>
 
     <div id="main">
@@ -108,7 +117,11 @@
         </center>
     </div>
 
-    <div id="right">How To Play</div>
+    <div id="right">Help Reggie set his watch!<br />
+        <textarea id="firstTask">to do 1</textarea><br />
+    <textarea id="secondTask">to do 2 </textarea><br />
+    <textarea id="thirdTask">to do 3</textarea>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -157,6 +170,7 @@
 
                     if (1 <= minuteCounter && minuteCounter <= 9)
                         minuteCounter = "0" + minuteCounter;
+
 
                     $("#minutes").text(minuteCounter);
                     minuteDegrees += 6;     // 360 degrees divided by 60 (minutes in an hour) equals 6 degrees per minute
