@@ -42,6 +42,7 @@
 
     <p>
         @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Back To Home", "Startup")
     </p>
     <table class="table">
         <tr>
@@ -52,7 +53,7 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayName("Score")
             </th>
             <th></th>
         </tr>

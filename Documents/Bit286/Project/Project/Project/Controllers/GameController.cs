@@ -16,12 +16,12 @@ namespace Project.Controllers
         public ActionResult SecondGame()
         {
             // display for picture and success message if answer is answered correctly set to not show in view
-
+            ViewBag.backgroundImage = "Game2StartPage1.png";
             ViewBag.e = "display: none";
             ViewBag.f = "display:inline";
-            ViewBag.question = "are you ready";
+            ViewBag.question = "";
             ViewBag.ans1 = "no";
-            ViewBag.correct = "yes";
+            ViewBag.correct = "START";
             ViewBag.answ = "no";
             ViewBag.answ3 = "no";
 
@@ -29,29 +29,31 @@ namespace Project.Controllers
             ViewBag.showPic = "display: none";
             Session["counter"] = 0;
 
-            return View(); 
+            return View();
         }
-      
+
 
         [HttpPost]
         public ActionResult SecondGame(SecondGameViewModel vm)
         {
-          
+
             int counter = (int)Session["counter"];
 
             Session["counter"] = counter++;
+            ViewBag.backgroundImage = "Game2Background.jpg";
             ViewBag.e = "display: inline";
             ViewBag.f = "display: inline";
-            if (counter == 7)
+            if (counter == 8)
             {
                 ViewBag.e = "display: none";
                 ViewBag.f = "display:none";
             }
             ViewBag.showPic = "display:none";
-            ViewBag.message = "Lets DO THIS!";
-          
+
+
             Random rnd = new Random();
 
+            string[] messages = new string[8];
             string[] questions = new string[8];
             string[] pictures = new string[8];
 
@@ -63,23 +65,41 @@ namespace Project.Controllers
             questions[5] = "What Shape Has 7 sides?";
             questions[6] = "What Shape Has 8 sides?";
             questions[7] = "You did it! Now Reggie has some great pics to remember the Parthenon. Press the next level button" +
-                " to go see another Wonder Of The World";
+                " to see what Wonder Reggie will travel to next.";
 
-            //pictures[0] =  ;
-            //pictures[1] =  ;
-            //pictures[2] =  ;
-            //pictures[3] =  ;
-            //pictures[4] =  ;
-            //pictures[5] =  ;
-            //pictures[6] =  ;
-            //pictures[7] =  ;
+            pictures[0] = "pic1c.jpeg";
+            pictures[1] = "pic2b.jpg";
+            pictures[2] = "pic9b.jpeg";
+            pictures[3] = "pic4b.JPG";
+            pictures[4] = "pic3b.jpeg";
+            pictures[5] = "pic7b.jpg";
+            pictures[6] = "airplane1.gif";
+
+            pictures[7] = "PUG.JPG";
+
+            messages[0] = "Thats right! Great Shot!";
+            messages[1] = "Reggie is so cute, isn't he!";
+            messages[2] = "You' doing great!";
+            messages[3] = "It's getting dark, it might";
+            messages[4] = "Reggie has his on! Good job!";
+            messages[6] = "Wow, you're really good at this!";
+            messages[7] = "be time to put on a jacket.";
+
             string questionString = null;
-            //assign question to view and question string so switchcase can assign answer pool
-            
-                ViewBag.question = questions[counter];
+            //allows program to delay correct answer shots until game has gone through 2nd post
+            if (counter >= 2)
+            {
+                ViewBag.correctAnswerImage = pictures[counter - 2];
+            }
 
-                questionString = ViewBag.question;
-            
+            ViewBag.message2 = "";
+            //assign question to view and question string so switchcase can assign answer pool
+
+            ViewBag.question = questions[counter - 1];
+            //allows correct pic to be seen and isolates until 3rd run using if statement in view
+            ViewBag.counter = counter;
+            questionString = ViewBag.question;
+
 
             // switch case checks questionString to determine answers pool to add to view
             switch (questionString)
@@ -92,6 +112,7 @@ namespace Project.Controllers
                     break;
 
                 case "What Shape Has 3 Sides?":
+                    ViewBag.message = messages[0];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Triangle";
                     ViewBag.answ = "Square";
@@ -100,6 +121,7 @@ namespace Project.Controllers
 
 
                 case "What Shape Has 4 Sides All Equal To Eachother?":
+                    ViewBag.message = messages[6];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.answ = "Triangle";
                     ViewBag.correct = "Square";
@@ -107,6 +129,7 @@ namespace Project.Controllers
                     break;
 
                 case "What Shape Has 5 sides?":
+                    ViewBag.message = messages[1];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Pentagon";
                     ViewBag.answ = "Square";
@@ -114,6 +137,7 @@ namespace Project.Controllers
                     break;
 
                 case "What Shape Has 6 sides?":
+                    ViewBag.message = messages[2];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Hexagon";
                     ViewBag.answ = "Square";
@@ -121,6 +145,8 @@ namespace Project.Controllers
                     break;
 
                 case "What Shape Has 7 sides?":
+                    ViewBag.message = messages[3];
+                    ViewBag.message2 = messages[7];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Heptagon";
                     ViewBag.answ = "Square";
@@ -128,6 +154,7 @@ namespace Project.Controllers
                     break;
 
                 case "What Shape Has 8 sides?":
+                    ViewBag.message = messages[4];
                     ViewBag.ans1 = "Rectangle";
                     ViewBag.correct = "Octagon";
                     ViewBag.answ = "Square";
@@ -138,7 +165,7 @@ namespace Project.Controllers
 
             counter++;
 
-            if(counter>= 9)
+            if (counter >= 10)
             {
                 ViewBag.showPic = "display:inline";
                 ViewBag.seen = "visibility: visible";
@@ -151,7 +178,7 @@ namespace Project.Controllers
 
             return View();
         }
-        
+
 
         public ActionResult Welcome()
         {
@@ -232,13 +259,13 @@ namespace Project.Controllers
         [HttpGet]
             public ActionResult ThirdGame()
         {
-            //int x = (int)Session["UserId"];
+            int x = (int)Session["UserId"];
 
-            //users m = db.users.SingleOrDefault(i => i.UserID == x);
+            users m = db.users.SingleOrDefault(i => i.UserID == x);
 
-            //m.UserName = "Two Points";
+            m.UserName = "Three Points";
 
-            //db.SaveChanges();
+            db.SaveChanges();
 
             return View();
         }
@@ -250,6 +277,7 @@ namespace Project.Controllers
             users d = db.users.SingleOrDefault(l => l.UserID == x);
 
             d.UserName = "Three Points";
+            db.SaveChanges();
 
             return RedirectToAction("Index", "users");
         }

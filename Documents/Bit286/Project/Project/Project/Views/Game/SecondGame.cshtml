@@ -8,78 +8,187 @@
 
 <html>
 <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>SecondGame</title>
 
     <style>
         body {
-            
-            background-image: url('../../Images/Game2Background.png'); 
-            background-size: contain;
         }
 
-        h4{
+        h3 {
             text-align: center;
             margin-bottom: 30px;
-            font-size: xx-large;
+            font-size: 250%;
         }
-        .form-group{
 
-            text-align:center;
-            display:inline-block;
+        .form-group {
+            display: inline-block;
+            align-content: center;
+            text-align: center;
             font-size: xx-large;
             padding: 25%,25%,25%,25%;
         }
 
+        #background {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+        }
+
+        .stretch {
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn {
+            background: border-box;
+            border: 4px solid black;
+            border-radius: 6px;
+            font-weight: bold;
+            color: black;
+            padding: 16px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+            .btn:hover {
+                background-color: black;
+                color: white;
+            }
+
+        .pic {
+            position: fixed; /* or absolute */
+            top: 26%;
+            left: 26%;
+        }
+
+        .pic2 {
+            position: fixed; /* or absolute */
+            top: 20%;
+            left: 20%;
+            bottom: 10%;
+        }
+
+        .hlink {
+            text-decoration: none;
+            text-transform: uppercase;
+            background: border-box;
+            border: 4px solid black;
+            border-radius: 6px;
+            font-weight: bold;
+            color: black;
+            padding: 16px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .hlink:hover {
+            background-color: black;
+            color: white;
+        }
+
+        h4 {
+            font-size: 24px;
+            color: darkslategrey;
+        }
     </style>
 </head>
 <body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+        <div id="background">
+            <img src="~/Images/@(ViewBag.backgroundImage)" class="stretch" alt="" />
+        </div>
         <div class="form-horizontal">
-            <h4>@ViewBag.question</h4>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.ans1" style="@ViewBag.e" class="btn btn-default" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="@ViewBag.correct" style="@ViewBag.f" class="btn btn-default" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.answ" style="@ViewBag.e" class="btn btn-default" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="@ViewBag.answ3" style="@ViewBag.e" class="btn btn-default" />
-                </div>
+            <h3>@ViewBag.question</h3>
+        </div>
+        <div class="form-group">
+            <div id="btn">
+                <input type="button" value="@ViewBag.ans1" style="@ViewBag.e" class="btn btn-default" />
             </div>
         </div>
 
-        <div style="@ViewBag.seen">
-            @Html.ActionLink("Next Game", "ThirdGame")
+        <div id="btn">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@ViewBag.correct" style="@ViewBag.f" class="btn btn-default" />
+            </div>
         </div>
-       
-        if (@ViewBag.correct != null)
+
+        <div id="btn">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="@ViewBag.answ" style="@ViewBag.e" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div id="btn">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="@ViewBag.answ3" style="@ViewBag.e" class="btn btn-default" />
+            </div>
+        </div>
+        <div class="hlink" style="position:absolute; bottom:0px; left:15px;">
+            @Html.ActionLink("Logout", "Welcome", null, new { style = "text-decoration:none; text-weight: bold; color: white" })
+        </div>
+        <h4>@ViewBag.message</h4><br />
+        <h4>@ViewBag.message2</h4>
+
+
+
+
+        if (@ViewBag.counter >= 2)
         {
-            <H1>@ViewBag.message</H1>
-            <p><img src="~/Images/Pug.jpg" style="@ViewBag.showPic" alt="coins" /></p>
-            
+            <div class="pic">
+                <img src="~/Images/@(ViewBag.correctAnswerImage)" />
+            </div>
         }
+        <div style="@ViewBag.seen">
+            <div class="hlink">
+                <div style="@ViewBag.seen">
+                    @Html.ActionLink("Next Level", "ThirdGame", null, new { style = "text-decoration:none; text-weight: bold; color: white" })
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
 
     }
 
 
-    <script>
 
-    </script>
 </body>
 </html>

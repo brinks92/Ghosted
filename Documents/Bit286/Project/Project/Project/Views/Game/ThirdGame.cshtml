@@ -7,7 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <title></title>
+    <title>Reggies Wonderful Adventure</title>
     <style>
         * {
             box-sizing: border-box;
@@ -17,7 +17,8 @@
             font-size: x-large;
             background-image: url('../../Images/westminster_bigben.jpg');
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: cover;            
+            font-weight: bold;
         }
 
         #clockFace {
@@ -48,17 +49,19 @@
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             color: forestgreen;
             font-style: oblique;
-            font-family: 'Comic Sans MS';
+            font-family: Calibri;
         }
 
         #header {
-            font-size: 24pt;
-            font-family: 'Comic Sans MS';
+            font-size: 30pt;
+            font-family: 'Old English Text MT';
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             color: forestgreen;
             width: 100%;
             height: 10%;
+            padding-left: 0px;
             text-align: center;
+            
         }
 
         #main {
@@ -67,7 +70,7 @@
             width: 40%; /* The width is 40%, by default */
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             color: white;
-            font-family: 'Comic Sans MS';
+            font-family: Calibri;
             font-size: xx-large;
         }
 
@@ -75,7 +78,7 @@
             /*padding: 20px;*/
             float: left;
             width: 30%; /* the width is 30%, by default */
-            font-family: 'Comic Sans MS';
+            font-family: Calibri;
             font-style: oblique;
             color: black;
             text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
@@ -86,21 +89,35 @@
             /*padding: 20px;*/
             float: left;
             width: 30%; /* The width is 30%, by default */
-            font-family: 'Comic Sans MS';
+            font-family: Calibri;
             font-style: oblique;
             color: black;
             text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
             text-align: left;
         }
 
-        #TryAgainMsgT1 {
+        #TryAgainMsgT1, #TryAgainMsgT2, #TryAgainMsgT3 {
             color: red;
+            font-weight: bold;
         }
-        #TryAgainMsgT2 {
-            color: red;
+        #btnEndGame {
+            width: 400px;
+            height: 214px;
+            background-image: url('../../Images/green_right_arrow.png');
+            position: fixed;
+            background-color: transparent;
+            border: 0px;
+            font-family: Calibri;
+            font-weight: bold;
+            font-style: oblique;
+            font-size: x-large;
+            color: black;
+            text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+            text-align: left;
+            padding: 20px;
         }
-        #TryAgainMsgT3 {
-            color: red;
+        #logout {
+            font-size: x-large;
         }
         /* Use a media query to add a break point at 800px: */
         @@media screen and (max-width:400px) {
@@ -114,8 +131,12 @@
     <div id="header"><h1>West Minster Abbey and Big Ben</h1></div>
 
     <div id="left">
-        Reggie has made it all the way to London, England, home of West Minster Abbey and the clocktower, Big Ben!<br />
-        <img src="~/Images/BritishPug.png" />
+        Reggie has made it all the way to London, England, home of West Minster Abbey and the clocktower, Big Ben, help him explore and keep track of time!<br />
+        <img src="~/Images/BritishPug.png" id="ImgBritishPug" />
+        <br />
+        <button id="logout">@Html.ActionLink("LogOut", "Welcome")</button>&nbsp;&nbsp;
+        <button id="logout">@Html.ActionLink("Next Game", "Index", "users")</button>
+
     </div>
 
     <div id="main">
@@ -128,27 +149,42 @@
             <p id="hours">12</p>:<p id="minutes"></p>
             <br />
             <button id="btnHour">Turn the Hour Hand</button>&nbsp;&nbsp;<button id="btnMinute">Turn the Minute Hand</button>
+            <br />
+            <br />
+            <div id="correctTime" hidden></div>
+
+
         </center>
     </div>
 
     <div id="right">
 
+        <h2>Solve These Problems:</h2>
         <div id="firstTask">
             The bell rings every 15 minutes, when will the bell ring next, if it's 12:30 right now?
             Move the minute hand by clicking the right button.
-
-            <button id="btnT1">Check Your Answer!</button><p id="TryAgainMsgT1" hidden>TRY AGAIN!</p>
+            <p id="TryAgainMsgT1" hidden>TRY AGAIN!</p>  <button id="btnT1">Check Your Answer!</button>
         </div>
         <br />
 
         <div id="secondTask">
-            <button id="btnT2" hidden>Check Your Answer!</button><p id="TryAgainMsgT2" hidden>TRY AGAIN!</p>
-        </div><br />
+        </div>
+        <p id="TryAgainMsgT2" hidden>TRY AGAIN!</p>
+        <button id="btnT2" hidden>Check Your Answer!</button>
+        <br />
 
 
-        <div id="thirdTask"></div>
-    </div>
+        <div id="thirdTask">
+        </div>
+        <p id="TryAgainMsgT3" hidden>TRY AGAIN!</p>
+        <button id="btnT3" hidden>Check Your Answer!</button>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
+            <input type="submit" id="btnEndGame" value="Continue..." hidden />
+        }
+        </div>
     <script>
         $(document).ready(function () {
             var hourDegrees = 0;
@@ -156,6 +192,10 @@
 
             var hourCounter = 12;    // the hour hand starting position
             var minuteCounter = 30;     // the minute hand starting position
+            var rndHour = Math.floor((Math.random() * 12) + 1);
+            var rndMin = Math.floor((Math.random() * 59) + 1);
+            var newHour;
+            var newMin;
 
             $("#hours").text(hourCounter);
             $("#minutes").text(minuteCounter);
@@ -171,50 +211,90 @@
                 $rotimg.css('transform', 'rotate(' + hourDegrees + 'deg)');
             }
 
-            $("#btnHour").on('click',
-                function () {
-                    var $rotimg = $('#hourHand');
+            $("#btnHour").click(function () {
+                var $rotimg = $('#hourHand');
 
-                    if (hourCounter == 12)
-                        hourCounter = 1;    // reset the hour counter
-                    else
-                        hourCounter++;  // increment hours by one
+                if (hourCounter == 12)
+                    hourCounter = 1;    // reset the hour counter
+                else
+                    hourCounter++;  // increment hours by one
 
-                    $("#hours").text(hourCounter);
-                    hourDegrees += 30;  // 360 degrees divided by 12 (hours in a day) equals 30 degrees per hour
-                    RotateHourHand($rotimg);
-                });
+                $("#hours").text(hourCounter);
+                hourDegrees += 30;  // 360 degrees divided by 12 (hours in a day) equals 30 degrees per hour
+                RotateHourHand($rotimg);
+            });
 
-            $("#btnMinute").on('click',
-                function () {
-                    var $rotimg = $('#minuteHand');
+            $("#btnMinute").click(function () {
+                var $rotimg = $('#minuteHand');
 
-                    if (minuteCounter == 59)
-                        minuteCounter = "0" + 0;    // reset the minute counter
-                    else
-                        minuteCounter++;  // increment minutes by one
+                if (minuteCounter == 59)
+                    minuteCounter = "0" + 0;    // reset the minute counter
+                else
+                    minuteCounter++;  // increment minutes by one
 
-                    if (1 <= minuteCounter && minuteCounter <= 9)
-                        minuteCounter = "0" + minuteCounter;
+                if (1 <= minuteCounter && minuteCounter <= 9)
+                    minuteCounter = "0" + minuteCounter;
 
 
-                    $("#minutes").text(minuteCounter);
-                    minuteDegrees += 6;     // 360 degrees divided by 60 (minutes in an hour) equals 6 degrees per minute
-                    RotateMinuteHand($rotimg);
-                });
+                $("#minutes").text(minuteCounter);
+                minuteDegrees += 6;     // 360 degrees divided by 60 (minutes in an hour) equals 6 degrees per minute
+                RotateMinuteHand($rotimg);
+            });
 
-            $("#btnT1").on('click',
-                function () {
-                    if (minuteCounter == 45) {
-                        $("#firstTask").slideUp();
-                        $("#secondTask").text("If it takes Reggie 35 minutes to walk around the building, what time will it be, if Reggie starts at " + hourCounter + ":" + minuteCounter + "?");
-                        $("#secondTask").slideDown();
-                        $("#secondTask").hide();
-                    }
-                    else {
-                        $("#TryAgainMsgT1").slideToggle().delay(1500).slideToggle();
-                    }
-                });
+            $("#btnT1").click(function () {
+                if (minuteCounter == 45) {
+                    $("#firstTask").slideUp();
+
+                    $("#secondTask").text("What time will it be, if it takes Reggie " + rndHour + " HOUR(S) and " + rndMin + " MINUTE(S) to walk around the building, if he starts at " + hourCounter + ":" + minuteCounter + "?");
+                    $("#secondTask").slideDown();
+                    $("#btnT2").toggle();
+                    newHour = (hourCounter + rndHour <= 12 ? hourCounter + rndHour : hourCounter + rndHour - 12);
+                    newMin = (minuteCounter + rndMin <= 59 ? minuteCounter + rndMin : minuteCounter + rndMin - 60);
+                    if (newMin <= 9)
+                        newMin = "0" + newMin;
+
+                }
+                else {
+                    $("#TryAgainMsgT1").slideToggle().delay(2000).slideToggle();
+                }
+            });
+
+            $("#btnT2").click(function () {
+                if (hourCounter == newHour && minuteCounter == newMin) {
+                    $("#secondTask").slideToggle();
+
+                    rndHour = Math.floor((Math.random() * 12) + 1);
+                    rndMin = Math.floor((Math.random() * 59) + 1);
+
+                    $("#thirdTask").text("Reggie is now ready to come home, his plane leaves in " + rndHour + " HOUR(S) and " + rndMin + " MINUTE(S). What Time does Reggie need to get to the airport?");
+
+                    $("#btnT2").toggle();
+                    $("#btnT3").toggle();
+
+                    newHour = (hourCounter + rndHour <= 12? hourCounter + rndHour : hourCounter + rndHour - 12);
+                    newMin = (minuteCounter + rndMin <= 59? minuteCounter + rndMin : minuteCounter + rndMin - 60);
+                    if (newMin <= 9)
+                        newMin = "0" + newMin;
+
+                }
+                else {
+                    $("#TryAgainMsgT3").slideToggle().delay(2000).slideToggle();
+                }
+                //$("h1").text("time: " + newHour + ":" + newMin);   
+            });
+
+            $("#btnT3").click(function () {
+                if (hourCounter == newHour && minuteCounter == newMin) {
+                    $("#thirdTask").slideToggle();
+                    $("#btnT3").toggle();
+
+                    $("h2").text("You did it, Great Job! Click the arrow to go home!");
+                    $("#btnEndGame").toggle();
+                }
+                else {
+                    $("#TryAgainMsgT2").slideToggle().delay(2000).slideToggle();
+                }
+            });
 
         });
     </script>
